@@ -469,11 +469,23 @@ if __name__ == "__main__":
         ],
     )
 
+    """
+    dexhand is DexHand class
+    inside /maniptrans_envs/lib/envs/dexhands/*
+    """
     dexhand = DexHandFactory.create_hand(_parser.dexhand, _parser.side)
 
     def run(parser, idx):
 
+
+        """
+        dataset type is grabdemo, oakink2 ..
+        """
         dataset_type = ManipDataFactory.dataset_type(idx)
+        """
+        dataset class base on ManipData
+        inside /main/dataset/*
+        """
         demo_d = ManipDataFactory.create_data(
             manipdata_type=dataset_type,
             side=parser.side,

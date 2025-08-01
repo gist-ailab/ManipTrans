@@ -28,7 +28,7 @@ class OakInk2DatasetDexHandLH(ManipData):
     def __init__(
         self,
         *,
-        data_dir: str = "data/OakInk-v2",
+        data_dir: str = "/ailab_mat2/dataset/hand_object_dataset/OakInk-v2",#TODO: change to /ailab_mat2/dataset/hand_object_dataset/OakInk-v2
         split: str = "all",
         skip: int = 2,  # OakInk2 120Hz, while DEXHAND 60Hz
         device="cuda:0",
@@ -59,12 +59,12 @@ class OakInk2DatasetDexHandLH(ManipData):
         SMPLX_DIM_SHAPE_ALL = 300
 
         self.smplx_layer = SMPLXLayer(
-            "data/body_utils/body_models/smplx",
+            "assets/smplx", #TODO: change to /ailab_mat2/dataset/hand_object_dataset/body_utils/body_models/smplx
             dtype=torch.float32,
             rot_mode=SMPLX_ROT_MODE,
             num_betas=SMPLX_DIM_SHAPE_ALL,
             gender="neutral",
-            use_body_upper_asset="data/smplx_extra/body_upper_idx.pt",
+            use_body_upper_asset="assets/smplx_extra/body_upper_idx.pt", #TODO: change to /ailab_mat2/dataset/hand_object_dataset/body_utils/body_models/smplx/smplx_extra/body_upper_idx.pt
         ).to(self.device)
         self.smplx_faces_np = self.smplx_layer.body_upper_faces.detach().clone().cpu().numpy()
         self.smplx_body_upper_idx = self.smplx_layer.body_upper_vert_idx.detach().clone().cpu().numpy()
@@ -182,7 +182,7 @@ class OakInk2DatasetDexHandLH(ManipData):
             np.repeat(mano_rot_offset[None], smplx_results.transform_abs.shape[0], axis=0), device=self.device
         )
 
-        obj_mesh = load_obj_map(os.path.join(self.data_dir, "object_preview", "align_ds"), object_list)
+        obj_mesh = load_obj_map(os.path.join(self.data_dir, "object_preview", "object_raw", "align_ds"), object_list) #TODO: data path
         obj_id = program_info_selected["obj_list_lh"][0]
         obj_mesh_trimesh = obj_mesh[program_info_selected["obj_list_lh"][0]][0]
         obj_mesh_path = obj_mesh[program_info_selected["obj_list_lh"][0]][1]
@@ -207,9 +207,9 @@ class OakInk2DatasetDexHandLH(ManipData):
         }
         obj_mesh_path_dir, obj_mesh_path_file = os.path.split(obj_mesh_path)
         obj_urdf_path_dir = obj_mesh_path_dir.replace(
-            "data/OakInk-v2/object_preview", "data/OakInk-v2/coacd_object_preview"
+            "OakInk-v2/object_preview/object_raw", "OakInk-v2/coacd_object_preview" #TODO: data path
         )
-        obj_urdf_path_file = obj_mesh_path_file.replace(".obj", ".urdf").replace(".ply", ".urdf")
+        obj_urdf_path_file = obj_mesh_path_file.replace(".obj", ".urdf").replace(".ply", ".urdf") #TODO: the urdf files is in the same folder as the collision file
         data["obj_urdf_path"] = os.path.join(obj_urdf_path_dir, obj_urdf_path_file)
 
         self.process_data(data, idx, rs_verts_obj)

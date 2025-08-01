@@ -257,14 +257,14 @@ ______________________________________________________________________
 2. **Training**
   Train bi-manual policies:
     ```bash
-    python main/rl/train.py task=ResDexHand dexhand=inspire side=BiH headless=true num_envs=4096 learning_rate=2e-4 test=false randomStateInit=true dataIndices=[20aed@0] rh_base_model_checkpoint=assets/imitator_rh_inspire.pth lh_base_model_checkpoint=assets/imitator_lh_inspire.pth early_stop_epochs=1000 actionsMovingAverage=0.4 experiment=cross_20aed@0_inspire
+    python main/rl/train.py task=ResDexHand dexhand=inspire side=BiH headless=true num_envs=4096 learning_rate=2e-4 test=false randomStateInit=true dataIndices=[20aed@0] early_stop_epochs=1000 actionsMovingAverage=0.4 experiment=cross_20aed@0_inspire
     ```
     Similar to single-hand training, the `early_stop_epochs` parameter can be adjusted based on the task complexity.
 
 3. **Test**
   Test the bi-manual policy:
     ```bash
-    python main/rl/train.py task=ResDexHand dexhand=inspire side=BiH headless=false num_envs=4 learning_rate=2e-4 test=true randomStateInit=false dataIndices=[20aed@0] rh_base_model_checkpoint=assets/imitator_rh_inspire.pth lh_base_model_checkpoint=assets/imitator_lh_inspire.pth actionsMovingAverage=0.4 checkpoint=runs/cross_20aed@0_inspire__xxxxxx/nn/cross_20aed@0_inspire.pth
+    python main/rl/train.py task=ResDexHand dexhand=inspire side=BiH headless=false num_envs=4 learning_rate=2e-4 test=true randomStateInit=false dataIndices=[20aed@0] actionsMovingAverage=0.4 checkpoint=runs/cross_20aed@0_inspire__07-31-06-34-03/nn/cross_20aed@0_inspire.pth
     ```
 
 ---

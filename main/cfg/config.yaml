@@ -12,8 +12,8 @@ experiment: ''
 side: 'Local'
 bimanual_mode: united
 dexhand: inspire
-rh_base_model_checkpoint: assets/imitator_rh_inspire.pth
-lh_base_model_checkpoint: assets/imitator_lh_inspire.pth
+rh_base_model_checkpoint: assets/imitator_ckp/imitator_rh_inspire.pth
+lh_base_model_checkpoint: assets/imitator_ckp/imitator_lh_inspire.pth
 
 # if set to positive integer, overrides the default number of environments
 num_envs: ''

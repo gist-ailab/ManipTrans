@@ -189,3 +189,9 @@ make*.py
 
 runs
 runs/*
+
+IsaacGym_Preview_4_Package
+IsaacGym_Preview_4_Package/*
+
+assets
+assets/*
